@@ -1,0 +1,54 @@
+[tool.poetry]
+name = "rinha-de-backend"
+version = "1.0.0"
+description = ""
+authors = ["Felipe <felipefrmelo@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+asyncpg = "^0.29.0"
+orjson = "^3.9.15"
+uvloop = "^0.19.0"
+sqlalchemy = "^2.0.28"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.0.2"
+pytest-asyncio = "^0.23.5"
+autopep8 = "^2.0.4"
+scalene = "^1.5.35"
+requests = "^2.31.0"
+rope = "^1.12.0"
+pytest-benchmark = "^4.0.0"
+line-profiler = "^4.1.2"
+memory-profiler = "^0.61.0"
+pyinstrument = "^4.6.2"
+yappi = "^1.6.0"
+maturin = "^1.5.0"
+matplotlib = "^3.8.3"
+pandas = "^2.2.1"
+
+
+[tool.poetry.group.starlette.dependencies]
+starlette = "0.36.3"
+
+
+[tool.poetry.group.robyn.dependencies]
+robyn = "^0.52.0"
+
+
+[tool.poetry.group.hypercorn.dependencies]
+hypercorn = "^0.16.0"
+
+
+[tool.poetry.group.uvicorn.dependencies]
+uvicorn = "^0.28.0"
+
+
+[tool.poetry.group.fastapi.dependencies]
+fastapi = "^0.110.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

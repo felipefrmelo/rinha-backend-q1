@@ -1,0 +1,36 @@
+
+### Endpoint de Transações:
+- Método: `POST`
+- Rota: `/clientes/[id]/transacoes`
+- Requisição:
+    - Deve incluir um JSON com os seguintes campos obrigatórios:
+        - `valor`: Um número inteiro positivo representando o valor da transação em centavos. Por exemplo, R$ 10 deve ser representado como 1000 centavos.
+        - `tipo`: Uma string indicando o tipo de transação, que deve ser apenas `"c"` para crédito ou `"d"` para débito.
+        - `descricao`: Uma string com comprimento entre 1 e 10 caracteres descrevendo a transação.
+- Resposta de Sucesso (`HTTP 200 OK`):
+    - Deve retornar um JSON com os seguintes campos:
+        - `limite`: O limite cadastrado do cliente.
+        - `saldo`: O novo saldo do cliente após a conclusão da transação.
+- Regras:
+    - Transações de débito não devem deixar o saldo do cliente menor que seu limite disponível.
+    - Se uma transação de débito violar essa regra, a API deve retornar `HTTP 422`.
+    - Se o cliente não for encontrado, a API deve retornar `HTTP 404`.
+    - HTTP 422 também deve ser retornado caso os campos do payload estejam fora das especificações como, por exemplo, um valor negativo ou uma descrição com mais de 10 caracteres.
+
+### Endpoint de Extrato:
+- Método: `GET`
+- Rota: `/clientes/[id]/extrato`
+- Resposta de Sucesso (`HTTP 200 OK`):
+    - Deve retornar um JSON com os seguintes campos:
+        - `saldo`:
+            - `total`: O saldo total atual do cliente.
+            - `data_extrato`: A data/hora da consulta do extrato.
+            - `limite`: O limite cadastrado do cliente.
+        - `ultimas_transacoes`: Uma lista ordenada por data/hora das últimas transações, contendo até as 10 últimas transações, cada uma com os seguintes campos:
+            - `valor`: O valor da transação.
+            - `tipo`: O tipo de transação, que pode ser `"c"` para crédito ou `"d"` para débito.
+            - `descricao`: A descrição informada durante a transação.
+            - `realizada_em`: A data/hora da realização da transação.
+- Regras:
+    - Se o cliente não for encontrado, a API deve retornar `HTTP 404`.
+
